@@ -1,0 +1,9 @@
+= Next-L Enju Flower
+
+== Related projects
+* {Next-L Enju Root}[https://github.com/next-l/enju_root]
+* {Next-L Enju Leaf}[https://github.com/next-l/enju_leaf]
+
+== Authors and contributors
+* {TANABE, Kosuke}[https://github.com/nabeta]
+* {Project Next-L}[http://www.next-l.jp]
