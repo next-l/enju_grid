@@ -5,7 +5,7 @@ require "enju_grid/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "enju_gird"
+  s.name        = "enju_grid"
   s.version     = EnjuGrid::VERSION
   s.authors     = ["Masao Takaku"]
   s.email       = ["tmasao@acm.org"]
