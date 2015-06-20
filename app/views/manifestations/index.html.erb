@@ -61,7 +61,7 @@
 	    <%- row.each do |manifestation| -%>
               <td style="width:31%">
                 <%= render 'manifestations/book_jacket', manifestation: manifestation -%>
-                <span class="original_title"><%=h manifestation.original_title %></span>
+		<%= render 'manifestations/show_index', manifestation: manifestation -%>
               </td>
 	    <%- end -%>
           </tr>
