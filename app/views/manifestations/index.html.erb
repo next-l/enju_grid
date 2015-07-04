@@ -60,7 +60,7 @@
           <tr class="line<%= cycle("0", "1") -%>">
 	    <%- row.each do |manifestation| -%>
               <td style="width:31%">
-                <%= render 'manifestations/book_jacket', manifestation: manifestation -%>
+	        <%= link_to render('manifestations/book_jacket', manifestation: manifestation), manifestation %>
 		<%= render 'manifestations/show_index', manifestation: manifestation -%>
               </td>
 	    <%- end -%>
