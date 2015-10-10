@@ -1,4 +1,5 @@
 language: ruby
+cache: bundler
 rvm:
   - 1.9.3
   - 2.0.0
@@ -15,12 +16,12 @@ gemfile:
   - gemfiles/rails_4.1.gemfile
   - gemfiles/rails_4.2.gemfile
 env:
+  matrix:
   - DB=sqlite
   - DB=mysql
   - DB=postgresql
 matrix:
   exclude:
-  - gemfile: gemfiles/rails_4.2_oai.gemfile
   - rvm: 1.9.3
     gemfile: gemfiles/rails_4.1.gemfile
   - rvm: 1.9.3
@@ -33,8 +34,8 @@ matrix:
     gemfile: gemfiles/rails_3.2.gemfile
   - rvm: 2.2.3
     gemfile: gemfiles/rails_3.2.gemfile
+sudo: false
 notifications:
   slack:
-    secure: a4NQNeYYOKABDoP9lFJt9oEx6QRRfagA4sjOeJUMjdc2AFGDtZ95FvZom9s9YYimduIUQfUScNF4tJvAzqrYhHTAaBxcLRERZQZWse4sZj0+xzSvUqauPCXwDheVCc/tlriUm06skKfz8WZBqL6vZyw4FfV6xLSrHVFAeIeSdsU=
-sudo: false
-cache: bundler
+    rooms:
+      secure: auRmUns5pJhlE50rGjIXk+RQLGb4XHR0VqLekZ6zEcUTIfDfbjM8G5Yf2ZaQOxk86qaB1ZcLtLrfCfUC0LJGL058u11kR8jdBFNDlz/krrfWLL0TfwfvootYCv3hgKly1RO4kXEj4Dyoy0TYgwTzRHU/ERbjnQVKZSS8+QcVW8xpUjUVAbwWhJXeaY0Dm+xtLYPmXNmcvkAlHB64h2F7jM040R6aUbnALfta07LM5/9MTWso0BVSsUPisNA9QAEP4tKXL2Cps4vMcQ1R3ED7qYH70u7CUcOHgMVOfqB6IoTQxyNUKOSBXV2RrJdCsb6xbgeolecfq3RbSYGpxROXzdZF6jA+namhI2p2HABWUOOw6xN/uwsR0laPIp+CEgbW5DGUaIFUS7inficRLpEyOznJd20JwHhj67TCx0dxTieps0D8Ig8chVE+MOaIBPVudV0bj15CglCNSYAgI1K63HvlsHCwi7Siv+4E/S5to1hSh0ptBAseikZ5fgxJjRIyyx0muY4tAJh2sLNiyYj1lq7rY+G1kvNuTFdROGEs/4sUapHNtHw2FqMWdGuoPNBQzoY5NiG5od7Y6lLMqNpZQzEvepbyyDddcBMcw0nGi0yTaGRsVYEcWCvlEd3r5f5HRLAJrtckas3j1cFOheM2jggqOxKaPq9mTy1suC/zqR4=
