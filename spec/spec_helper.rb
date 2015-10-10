@@ -8,7 +8,6 @@ require 'rspec/rails'
 require 'vcr'
 require 'factory_girl'
 require 'sunspot-rails-tester'
-require 'rspec/active_model/mocks'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
