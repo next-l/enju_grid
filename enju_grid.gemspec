@@ -28,6 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_bookmark", "~> 0.1.2.pre22"
   s.add_development_dependency "enju_subject", "~> 0.1.0.pre33"
   s.add_development_dependency "sunspot-rails-tester"
-  s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "appraisal"
 end
