@@ -14,19 +14,17 @@ describe "manifestations/index" do
     @index_agent = {}
     @seconds = 0
     @max_number_of_results = 500
-
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
   end
 
   it "renders attributes in <p>" do
+    allow(view).to receive(:policy).and_return double(update?: true)
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/1/)
   end
 
   it "renders with per_page parameter" do
+    allow(view).to receive(:policy).and_return double(update?: true)
     params[:per_page] = 3
     expect{ render }.not_to raise_error
     expect( rendered ).to match /31\%/
