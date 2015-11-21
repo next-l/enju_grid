@@ -1,4 +1,7 @@
 = Next-L Enju Grid
+{<img src="https://travis-ci.org/next-l/enju_grid.svg?branch=1.2" alt="Build Status" />}[https://travis-ci.org/next-l/enju_grid]
+{<img src="https://coveralls.io/repos/next-l/enju_grid/badge.svg?branch=1.2&service=github" alt="Coverage Status" />}[https://coveralls.io/github/next-l/enju_grid?branch=1.2]
+{<img src="https://hakiri.io/github/next-l/enju_grid/1.2.svg" alt="security" />}[https://hakiri.io/github/next-l/enju_grid/1.2]
 
 == Related projects
 * {Next-L Enju Flower}[https://github.com/next-l/enju_flower]
