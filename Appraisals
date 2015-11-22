@@ -5,15 +5,18 @@ appraise "rails-3.2" do
   gem "strong_parameters"
   gem "cache_digests"
   gem "foreigner"
+  gem "coveralls"
 end
 
 appraise "rails-4.1" do
   gem "rails", "~> 4.1.14"
   gem "jquery-rails"
   gem "foreigner"
+  gem "coveralls"
 end
 
 appraise "rails-4.2" do
   gem "rails", "~> 4.2.5"
   gem "jquery-rails"
+  gem "coveralls"
 end

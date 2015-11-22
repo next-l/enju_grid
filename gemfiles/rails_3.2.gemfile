@@ -8,5 +8,6 @@ gem "cancancan", "~> 1.12.0"
 gem "strong_parameters"
 gem "cache_digests"
 gem "foreigner"
+gem "coveralls"
 
 gemspec :path => "../"
