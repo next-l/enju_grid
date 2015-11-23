@@ -8,6 +8,7 @@ gem "cancancan", "~> 1.12.0"
 gem "strong_parameters"
 gem "cache_digests"
 gem "foreigner"
-gem "coveralls"
+gem "coveralls", :require => false
+gem "enju_leaf", :github => "next-l/enju_leaf", :branch => "1.1"
 
 gemspec :path => "../"

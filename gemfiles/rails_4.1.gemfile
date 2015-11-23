@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gem "rails", "~> 4.1.14"
 gem "jquery-rails"
 gem "foreigner"
-gem "coveralls"
+gem "coveralls", :require => false
+gem "enju_leaf", :github => "next-l/enju_leaf", :branch => "1.1"
 
 gemspec :path => "../"
