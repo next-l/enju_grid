@@ -12,6 +12,7 @@ gemspec
 gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '1.2'
 gem 'enju_biblio', github: 'next-l/enju_biblio', branch: '1.2'
 gem 'enju_circulation', github: 'next-l/enju_circulation', branch: '1.2'
+gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer', branch: '1.2'
 
 # To use debugger
 # gem 'debugger'
