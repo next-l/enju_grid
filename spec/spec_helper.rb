@@ -5,7 +5,6 @@ SimpleCov.start 'rails'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
-require 'vcr'
 require 'factory_girl'
 require 'sunspot-rails-tester'
 
@@ -50,6 +49,3 @@ end
 FactoryGirl.definition_file_paths << "#{::Rails.root}/../../spec/factories"
 FactoryGirl.find_definitions
 
-VCR.configure do |c|
-  c.allow_http_connections_when_no_cassette = true
-end

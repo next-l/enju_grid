@@ -3,7 +3,10 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require "enju_grid"
+require 'enju_grid'
+require 'enju_leaf'
+require 'enju_circulation'
+require 'enju_manifestation_viewer'
 
 module Dummy
   class Application < Rails::Application

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925092505) do
+ActiveRecord::Schema.define(version: 20151125004028) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
@@ -160,12 +160,14 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.string   "birth_date"
     t.string   "death_date"
     t.string   "agent_identifier"
+    t.integer  "profile_id"
   end
 
   add_index "agents", ["agent_identifier"], name: "index_agents_on_agent_identifier"
   add_index "agents", ["country_id"], name: "index_agents_on_country_id"
   add_index "agents", ["full_name"], name: "index_agents_on_full_name"
   add_index "agents", ["language_id"], name: "index_agents_on_language_id"
+  add_index "agents", ["profile_id"], name: "index_agents_on_profile_id"
   add_index "agents", ["required_role_id"], name: "index_agents_on_required_role_id"
 
   create_table "baskets", force: :cascade do |t|
@@ -343,8 +345,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.integer  "lock_version",           default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "shelf_id"
-    t.integer  "library_id"
   end
 
   add_index "checkouts", ["basket_id"], name: "index_checkouts_on_basket_id"
@@ -352,8 +352,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
   add_index "checkouts", ["item_id", "basket_id"], name: "index_checkouts_on_item_id_and_basket_id", unique: true
   add_index "checkouts", ["item_id"], name: "index_checkouts_on_item_id"
   add_index "checkouts", ["librarian_id"], name: "index_checkouts_on_librarian_id"
-  add_index "checkouts", ["library_id"], name: "index_checkouts_on_library_id"
-  add_index "checkouts", ["shelf_id"], name: "index_checkouts_on_shelf_id"
   add_index "checkouts", ["user_id"], name: "index_checkouts_on_user_id"
 
   create_table "circulation_statuses", force: :cascade do |t|
@@ -453,18 +451,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
   add_index "creates", ["agent_id"], name: "index_creates_on_agent_id"
   add_index "creates", ["work_id"], name: "index_creates_on_work_id"
 
-  create_table "demands", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "item_id"
-    t.integer  "message_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "demands", ["item_id"], name: "index_demands_on_item_id"
-  add_index "demands", ["message_id"], name: "index_demands_on_message_id"
-  add_index "demands", ["user_id"], name: "index_demands_on_user_id"
-
   create_table "donates", force: :cascade do |t|
     t.integer  "agent_id",   null: false
     t.integer  "item_id",    null: false
@@ -474,102 +460,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
 
   add_index "donates", ["agent_id"], name: "index_donates_on_agent_id"
   add_index "donates", ["item_id"], name: "index_donates_on_item_id"
-
-  create_table "event_categories", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.text     "display_name"
-    t.text     "note"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "event_export_file_transitions", force: :cascade do |t|
-    t.string   "to_state"
-    t.text     "metadata",             default: "{}"
-    t.integer  "sort_key"
-    t.integer  "event_export_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "event_export_file_transitions", ["event_export_file_id"], name: "index_event_export_file_transitions_on_file_id"
-  add_index "event_export_file_transitions", ["sort_key", "event_export_file_id"], name: "index_event_export_file_transitions_on_sort_key_and_file_id", unique: true
-
-  create_table "event_export_files", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "executed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "event_export_id"
-    t.integer  "event_export_size"
-    t.string   "event_export_filename"
-  end
-
-  add_index "event_export_files", ["event_export_id"], name: "index_event_export_files_on_event_export_id"
-
-  create_table "event_import_file_transitions", force: :cascade do |t|
-    t.string   "to_state"
-    t.text     "metadata",             default: "{}"
-    t.integer  "sort_key"
-    t.integer  "event_import_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "event_import_file_transitions", ["event_import_file_id"], name: "index_event_import_file_transitions_on_event_import_file_id"
-  add_index "event_import_file_transitions", ["sort_key", "event_import_file_id"], name: "index_event_import_file_transitions_on_sort_key_and_file_id", unique: true
-
-  create_table "event_import_files", force: :cascade do |t|
-    t.integer  "parent_id"
-    t.string   "content_type"
-    t.integer  "size"
-    t.integer  "user_id"
-    t.text     "note"
-    t.datetime "executed_at"
-    t.string   "event_import_filename"
-    t.string   "event_import_content_type"
-    t.integer  "event_import_size"
-    t.datetime "event_import_updated_at"
-    t.string   "edit_mode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "event_import_fingerprint"
-    t.text     "error_message"
-    t.string   "user_encoding"
-    t.integer  "default_library_id"
-    t.integer  "default_event_category_id"
-    t.string   "event_import_id"
-  end
-
-  add_index "event_import_files", ["event_import_id"], name: "index_event_import_files_on_event_import_id"
-  add_index "event_import_files", ["parent_id"], name: "index_event_import_files_on_parent_id"
-  add_index "event_import_files", ["user_id"], name: "index_event_import_files_on_user_id"
-
-  create_table "event_import_results", force: :cascade do |t|
-    t.integer  "event_import_file_id"
-    t.integer  "event_id"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.integer  "library_id",                        null: false
-    t.integer  "event_category_id",                 null: false
-    t.string   "name"
-    t.text     "note"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.boolean  "all_day",           default: false, null: false
-    t.datetime "deleted_at"
-    t.text     "display_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "events", ["event_category_id"], name: "index_events_on_event_category_id"
-  add_index "events", ["library_id"], name: "index_events_on_library_id"
 
   create_table "exemplifies", force: :cascade do |t|
     t.integer  "manifestation_id", null: false
@@ -668,18 +558,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
 
   add_index "item_has_use_restrictions", ["item_id"], name: "index_item_has_use_restrictions_on_item_id"
   add_index "item_has_use_restrictions", ["use_restriction_id"], name: "index_item_has_use_restrictions_on_use_restriction_id"
-
-  create_table "item_transitions", force: :cascade do |t|
-    t.string   "to_state"
-    t.text     "metadata",   default: "{}"
-    t.integer  "sort_key"
-    t.integer  "item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "item_transitions", ["item_id"], name: "index_item_transitions_on_item_id"
-  add_index "item_transitions", ["sort_key", "item_id"], name: "index_item_transitions_on_sort_key_and_item_id", unique: true
 
   create_table "items", force: :cascade do |t|
     t.string   "call_number"
@@ -788,9 +666,9 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "admin_networks"
+    t.boolean  "allow_bookmark_external_url", default: false,                    null: false
     t.string   "url",                         default: "http://localhost:3000/"
     t.text     "settings"
-    t.boolean  "allow_bookmark_external_url", default: false,                    null: false
   end
 
   add_index "library_groups", ["short_name"], name: "index_library_groups_on_short_name"
@@ -953,73 +831,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.datetime "updated_at"
   end
 
-  create_table "message_request_transitions", force: :cascade do |t|
-    t.string   "to_state"
-    t.text     "metadata",           default: "{}"
-    t.integer  "sort_key"
-    t.integer  "message_request_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "message_request_transitions", ["message_request_id"], name: "index_message_request_transitions_on_message_request_id"
-  add_index "message_request_transitions", ["sort_key", "message_request_id"], name: "index_message_request_transitions_on_sort_key_and_request_id", unique: true
-
-  create_table "message_requests", force: :cascade do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.integer  "message_template_id"
-    t.datetime "sent_at"
-    t.datetime "deleted_at"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "message_templates", force: :cascade do |t|
-    t.string   "status",                    null: false
-    t.text     "title",                     null: false
-    t.text     "body",                      null: false
-    t.integer  "position"
-    t.string   "locale",     default: "en"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "message_templates", ["status"], name: "index_message_templates_on_status", unique: true
-
-  create_table "message_transitions", force: :cascade do |t|
-    t.string   "to_state"
-    t.text     "metadata",   default: "{}"
-    t.integer  "sort_key"
-    t.integer  "message_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "message_transitions", ["message_id"], name: "index_message_transitions_on_message_id"
-  add_index "message_transitions", ["sort_key", "message_id"], name: "index_message_transitions_on_sort_key_and_message_id", unique: true
-
-  create_table "messages", force: :cascade do |t|
-    t.datetime "read_at"
-    t.integer  "receiver_id"
-    t.integer  "sender_id"
-    t.string   "subject",            null: false
-    t.text     "body"
-    t.integer  "message_request_id"
-    t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "depth"
-  end
-
-  add_index "messages", ["message_request_id"], name: "index_messages_on_message_request_id"
-  add_index "messages", ["parent_id"], name: "index_messages_on_parent_id"
-  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id"
-  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id"
-
   create_table "owns", force: :cascade do |t|
     t.integer  "agent_id",   null: false
     t.integer  "item_id",    null: false
@@ -1030,17 +841,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
 
   add_index "owns", ["agent_id"], name: "index_owns_on_agent_id"
   add_index "owns", ["item_id"], name: "index_owns_on_item_id"
-
-  create_table "participates", force: :cascade do |t|
-    t.integer  "agent_id",   null: false
-    t.integer  "event_id",   null: false
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "participates", ["agent_id"], name: "index_participates_on_agent_id"
-  add_index "participates", ["event_id"], name: "index_participates_on_event_id"
 
   create_table "picture_files", force: :cascade do |t|
     t.integer  "picture_attachable_id"
@@ -1099,9 +899,9 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.string   "checkout_icalendar_token"
     t.boolean  "save_checkout_history",    default: false, null: false
     t.datetime "expired_at"
+    t.boolean  "share_bookmarks"
     t.text     "full_name_transcription"
     t.datetime "date_of_birth"
-    t.boolean  "share_bookmarks"
   end
 
   add_index "profiles", ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
@@ -1194,7 +994,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.datetime "deleted_at"
     t.boolean  "expiration_notice_to_patron",  default: false
     t.boolean  "expiration_notice_to_library", default: false
-    t.integer  "pickup_location_id"
     t.datetime "retained_at"
     t.datetime "postponed_at"
     t.integer  "lock_version",                 default: 0,     null: false
@@ -1202,7 +1001,6 @@ ActiveRecord::Schema.define(version: 20150925092505) do
 
   add_index "reserves", ["item_id"], name: "index_reserves_on_item_id"
   add_index "reserves", ["manifestation_id"], name: "index_reserves_on_manifestation_id"
-  add_index "reserves", ["pickup_location_id"], name: "index_reserves_on_pickup_location_id"
   add_index "reserves", ["request_status_type_id"], name: "index_reserves_on_request_status_type_id"
   add_index "reserves", ["user_id"], name: "index_reserves_on_user_id"
 
@@ -1448,6 +1246,7 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.string   "name_transcription"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "taggings_count",     default: 0
   end
 
   create_table "use_restrictions", force: :cascade do |t|
@@ -1569,7 +1368,7 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.integer  "user_id"
     t.text     "note"
     t.datetime "executed_at"
-    t.string   "user_import_filename"
+    t.string   "user_import_file_name"
     t.string   "user_import_content_type"
     t.integer  "user_import_file_size"
     t.datetime "user_import_updated_at"
@@ -1581,11 +1380,7 @@ ActiveRecord::Schema.define(version: 20150925092505) do
     t.string   "user_encoding"
     t.integer  "default_library_id"
     t.integer  "default_user_group_id"
-    t.string   "user_import_id"
-    t.integer  "user_import_size"
   end
-
-  add_index "user_import_files", ["user_import_id"], name: "index_user_import_files_on_user_import_id"
 
   create_table "user_import_results", force: :cascade do |t|
     t.integer  "user_import_file_id"
@@ -1622,27 +1417,31 @@ ActiveRecord::Schema.define(version: 20150925092505) do
   add_index "user_reserve_stats", ["user_id"], name: "index_user_reserve_stats_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                    default: "",    null: false
+    t.string   "encrypted_password",       default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",            default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "save_checkout_history",    default: false, null: false
+    t.string   "checkout_icalendar_token"
+    t.boolean  "share_bookmarks"
     t.string   "username"
     t.datetime "deleted_at"
     t.datetime "expired_at"
-    t.integer  "failed_attempts",        default: 0
+    t.integer  "failed_attempts",          default: 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
   end
 
+  add_index "users", ["checkout_icalendar_token"], name: "index_users_on_checkout_icalendar_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true

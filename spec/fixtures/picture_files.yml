@@ -46,18 +46,18 @@ picture_file_00004:
 #
 #  id                      :integer          not null, primary key
 #  picture_attachable_id   :integer
-#  picture_attachable_type :string
-#  content_type            :string
+#  picture_attachable_type :string(255)
+#  content_type            :string(255)
 #  title                   :text
-#  thumbnail               :string
+#  thumbnail               :string(255)
 #  position                :integer
-#  created_at              :datetime
-#  updated_at              :datetime
-#  picture_filename        :string
-#  picture_content_type    :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  picture_filename       :string(255)
+#  picture_content_type    :string(255)
 #  picture_size       :integer
 #  picture_updated_at      :datetime
 #  picture_meta            :text
-#  picture_fingerprint     :string
-#  picture_id              :string
+#  picture_fingerprint     :string(255)
 #
+

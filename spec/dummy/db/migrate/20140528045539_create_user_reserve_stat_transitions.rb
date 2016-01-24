@@ -2,11 +2,7 @@ class CreateUserReserveStatTransitions < ActiveRecord::Migration
   def change
     create_table :user_reserve_stat_transitions do |t|
       t.string :to_state
-      if ActiveRecord::Base.configurations[Rails.env]["adapter"].try(:match, /mysql/)
-        t.text :metadata
-      else
-        t.text :metadata, default: "{}"
-      end
+      t.text :metadata, default: "{}"
       t.integer :sort_key
       t.integer :user_reserve_stat_id
       t.timestamps
