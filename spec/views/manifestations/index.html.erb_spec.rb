@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "manifestations/index" do
   fixtures :all
@@ -14,6 +14,7 @@ describe "manifestations/index" do
     @index_agent = {}
     @seconds = 0
     @max_number_of_results = 500
+    view.stub(:params).and_return(ActionController::Parameters.new)
   end
 
   it "renders attributes in <p>" do
