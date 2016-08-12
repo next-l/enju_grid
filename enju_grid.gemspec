@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids,default,development,test}/*"] - Dir["spec/dummy/tmp/*"]
 
   s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.1"
-  s.add_development_dependency "enju_library", "~> 0.2.0.beta.1"
+  s.add_development_dependency "enju_library", "~> 0.2.0.beta.2"
   s.add_development_dependency "enju_biblio", "~> 0.2.0.beta.1"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0.beta.1"
   s.add_development_dependency "enju_message", "~> 0.2.0.beta.1"
