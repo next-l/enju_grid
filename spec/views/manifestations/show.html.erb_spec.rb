@@ -5,6 +5,7 @@ describe "manifestations/show" do
 
   before(:each) do
     @manifestation = assign(:manifestation, FactoryGirl.create(:manifestation))
+    @library_group = LibraryGroup.first
   end
 
   it "renders attributes in <p>" do

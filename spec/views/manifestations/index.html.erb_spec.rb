@@ -14,6 +14,7 @@ describe "manifestations/index" do
     @index_agent = {}
     @seconds = 0
     @max_number_of_results = 500
+    @library_group = LibraryGroup.first
     view.stub(:params).and_return(ActionController::Parameters.new)
   end
 
