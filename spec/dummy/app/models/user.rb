@@ -6,3 +6,5 @@ class User < ActiveRecord::Base
   include EnjuSeed::EnjuUser
   include EnjuCirculation::EnjuUser
 end
+
+Manifestation.include(EnjuSubject::EnjuManifestation)
