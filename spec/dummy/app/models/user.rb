@@ -8,3 +8,4 @@ class User < ActiveRecord::Base
 end
 
 Manifestation.include(EnjuSubject::EnjuManifestation)
+Item.include(EnjuCirculation::EnjuItem)
