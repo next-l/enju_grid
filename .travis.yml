@@ -10,7 +10,6 @@ services:
   - redis-server
 env:
   matrix:
-  - DB=sqlite
   - DB=postgresql
 notifications:
   slack:
