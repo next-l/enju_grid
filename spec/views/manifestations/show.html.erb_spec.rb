@@ -6,6 +6,8 @@ describe "manifestations/show" do
   before(:each) do
     @manifestation = assign(:manifestation, FactoryGirl.create(:manifestation))
     @library_group = LibraryGroup.first
+    @manifestation.stub(:attachment){ true }
+    @manifestation.attachment.stub(:metadata){ { filename: 'test.txt' } }
   end
 
   it "renders attributes in <p>" do

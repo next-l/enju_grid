@@ -271,7 +271,7 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["carrier_type_id"], name: "index_carrier_type_has_checkout_types_on_m_form_id", using: :btree
+    t.index ["carrier_type_id"], name: "index_carrier_type_has_checkout_types_on_carrier_type_id", using: :btree
     t.index ["checkout_type_id"], name: "index_carrier_type_has_checkout_types_on_checkout_type_id", using: :btree
   end
 
@@ -301,7 +301,7 @@ ActiveRecord::Schema.define(version: 20161112122814) do
   end
 
   create_table "checkins", force: :cascade do |t|
-    t.integer  "item_id",                  null: false
+    t.integer  "item_id"
     t.integer  "librarian_id"
     t.integer  "basket_id"
     t.datetime "created_at"
@@ -353,11 +353,15 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.integer  "lock_version",           default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shelf_id"
+    t.integer  "library_id"
     t.index ["basket_id"], name: "index_checkouts_on_basket_id", using: :btree
     t.index ["checkin_id"], name: "index_checkouts_on_checkin_id", using: :btree
     t.index ["item_id", "basket_id"], name: "index_checkouts_on_item_id_and_basket_id", unique: true, using: :btree
     t.index ["item_id"], name: "index_checkouts_on_item_id", using: :btree
     t.index ["librarian_id"], name: "index_checkouts_on_librarian_id", using: :btree
+    t.index ["library_id"], name: "index_checkouts_on_library_id", using: :btree
+    t.index ["shelf_id"], name: "index_checkouts_on_shelf_id", using: :btree
     t.index ["user_id"], name: "index_checkouts_on_user_id", using: :btree
   end
 
@@ -453,6 +457,17 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.integer  "create_type_id"
     t.index ["agent_id"], name: "index_creates_on_agent_id", using: :btree
     t.index ["work_id"], name: "index_creates_on_work_id", using: :btree
+  end
+
+  create_table "demands", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_demands_on_item_id", using: :btree
+    t.index ["message_id"], name: "index_demands_on_message_id", using: :btree
+    t.index ["user_id"], name: "index_demands_on_user_id", using: :btree
   end
 
   create_table "doi_records", force: :cascade do |t|
@@ -590,6 +605,17 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.index ["use_restriction_id"], name: "index_item_has_use_restrictions_on_use_restriction_id", using: :btree
   end
 
+  create_table "item_transitions", force: :cascade do |t|
+    t.string   "to_state"
+    t.text     "metadata",   default: "{}"
+    t.integer  "sort_key"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["item_id"], name: "index_item_transitions_on_item_id", using: :btree
+    t.index ["sort_key", "item_id"], name: "index_item_transitions_on_sort_key_and_item_id", unique: true, using: :btree
+  end
+
   create_table "items", force: :cascade do |t|
     t.string   "call_number"
     t.string   "item_identifier"
@@ -724,6 +750,7 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.integer  "manifestation_checkout_stat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
     t.index ["manifestation_checkout_stat_id"], name: "index_manifestation_checkout_stat_transitions_on_stat_id", using: :btree
     t.index ["sort_key", "manifestation_checkout_stat_id"], name: "index_manifestation_checkout_stat_transitions_on_transition", unique: true, using: :btree
   end
@@ -767,6 +794,7 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.integer  "manifestation_reserve_stat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
     t.index ["manifestation_reserve_stat_id"], name: "index_manifestation_reserve_stat_transitions_on_stat_id", using: :btree
     t.index ["sort_key", "manifestation_reserve_stat_id"], name: "index_manifestation_reserve_stat_transitions_on_transition", unique: true, using: :btree
   end
@@ -1070,11 +1098,12 @@ ActiveRecord::Schema.define(version: 20161112122814) do
 
   create_table "reserve_transitions", force: :cascade do |t|
     t.string   "to_state"
-    t.text     "metadata",   default: "{}"
+    t.text     "metadata",    default: "{}"
     t.integer  "sort_key"
     t.integer  "reserve_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
     t.index ["reserve_id"], name: "index_reserve_transitions_on_reserve_id", using: :btree
     t.index ["sort_key", "reserve_id"], name: "index_reserve_transitions_on_sort_key_and_reserve_id", unique: true, using: :btree
   end
@@ -1092,11 +1121,13 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.datetime "deleted_at"
     t.boolean  "expiration_notice_to_patron",  default: false
     t.boolean  "expiration_notice_to_library", default: false
+    t.integer  "pickup_location_id"
     t.datetime "retained_at"
     t.datetime "postponed_at"
     t.integer  "lock_version",                 default: 0,     null: false
     t.index ["item_id"], name: "index_reserves_on_item_id", using: :btree
     t.index ["manifestation_id"], name: "index_reserves_on_manifestation_id", using: :btree
+    t.index ["pickup_location_id"], name: "index_reserves_on_pickup_location_id", using: :btree
     t.index ["request_status_type_id"], name: "index_reserves_on_request_status_type_id", using: :btree
     t.index ["user_id"], name: "index_reserves_on_user_id", using: :btree
   end
@@ -1354,6 +1385,7 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.integer  "user_checkout_stat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
     t.index ["sort_key", "user_checkout_stat_id"], name: "index_user_checkout_stat_transitions_on_sort_key_and_stat_id", unique: true, using: :btree
     t.index ["user_checkout_stat_id"], name: "index_user_checkout_stat_transitions_on_user_checkout_stat_id", using: :btree
   end
@@ -1482,6 +1514,7 @@ ActiveRecord::Schema.define(version: 20161112122814) do
     t.integer  "user_reserve_stat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
     t.index ["sort_key", "user_reserve_stat_id"], name: "index_user_reserve_stat_transitions_on_sort_key_and_stat_id", unique: true, using: :btree
     t.index ["user_reserve_stat_id"], name: "index_user_reserve_stat_transitions_on_user_reserve_stat_id", using: :btree
   end
@@ -1553,5 +1586,6 @@ ActiveRecord::Schema.define(version: 20161112122814) do
   add_foreign_key "items", "shelves"
   add_foreign_key "library_groups", "users"
   add_foreign_key "periodicals", "manifestations"
+  add_foreign_key "reserves", "manifestations"
   add_foreign_key "shelves", "libraries"
 end
