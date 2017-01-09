@@ -5,11 +5,9 @@ one:
   display_name: "<%= I18n.locale %>: Enju Library"
   short_name: enju
   note: 
-  my_networks: "0.0.0.0/0\r\n\
-    ::/0"
+  my_networks: "0.0.0.0/0"
   url: "http://localhost:3000/"
-  admin_networks: "0.0.0.0/0\r\n\
-    ::/0"
+  admin_networks: "0.0.0.0/0"
   user_id: 1
 
 # == Schema Information
