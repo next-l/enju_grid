@@ -35,24 +35,39 @@
       <%- end -%>
     </p>
 
-    <p>
-      <%= t('page.sort_by') -%>:
-      <%- if params[:sort_by].blank? -%>
-        <strong><%= t('manifestation.date_of_acquisition') -%></strong>
-      <%- else -%>
-        <%= link_to t('manifestation.date_of_acquisition'), url_for(params.permit.merge(sort_by: nil, only_path: true)) -%>
+    <div class="field right">
+      <%= form_for :manifestations, url: manifestations_path, html: {method: 'get'} do -%>
+        <p>
+          <%= select_tag 'per_page', options_for_select({
+            t('page.per_page', num: 10) => 10,
+            t('page.per_page', num: 20) => 20,
+            t('page.per_page', num: 50) => 50,
+            t('page.per_page', num: 100) => 100,
+          }, selected: filtered_params[:per_page]) %>
+          <%= select_tag 'sort_by', options_for_select({
+            [t('page.sort_criteria.created_at'),
+              t('page.sort_criteria.date_desc')].join(" : ") => 'created_at:desc',
+            [t('page.sort_criteria.created_at'),
+              t('page.sort_criteria.date_asc')].join(" : ") => 'created_at:asc',
+            [t('activerecord.attributes.manifestation.pub_date'),
+              t('page.sort_criteria.date_desc')].join(" : ") => 'pub_date:desc',
+            [t('activerecord.attributes.manifestation.pub_date'),
+              t('page.sort_criteria.date_asc')].join(" : ") => 'pub_date:asc',
+            [t('page.score'),
+              t('page.sort_criteria.score_desc')].join(" : ") => 'score:desc',
+            [t('page.title'),
+              t('page.sort_criteria.title_asc')].join(" : ") => 'title:asc',
+            [t('page.title'),
+              t('page.sort_criteria.title_desc')].join(" : ") => 'title:desc',
+          }, selected: filtered_params[:sort_by] || 'created_at:desc') -%>
+          <%= hidden_field_tag 'query', @query -%>
+          <% [ :reservable, :carrier_type, :library, :language, :pub_year ].each do |p| -%>
+            <%= hidden_field_tag p, filtered_params[p] if filtered_params[p] -%>
+          <% end -%>
+          <%= submit_tag t('page.show') -%><br />
+        </p>
       <%- end -%>
-      <%- if params[:sort_by] == 'pub_date' -%>
-        <strong><%= t('activerecord.attributes.manifestation.date_of_publication') -%></strong>
-      <%- else -%>
-        <%= link_to t('activerecord.attributes.manifestation.date_of_publication'), url_for(params.permit.merge(sort_by: 'pub_date', only_path: true)) -%>
-      <%- end -%>
-      <%- if params[:sort_by] == 'title' -%>
-        <strong><%= t('page.title') -%></strong>
-      <%- else -%>
-        <%= link_to t('page.title'), url_for(params.permit.merge(sort_by: 'title', only_path: true)) -%>
-      <%- end -%>
-    </p>
+    </div>
 
     <div class="autopagerize_page_element" id="list">
       <table class="table table-striped index" id="manifestation_list">
@@ -82,12 +97,15 @@
       </div>
     <% end %>
   <%- else -%>
-    <!-- TODO: 検索結果が少ない場合にも表示させる -->
-    <%= render 'manifestations/not_found' -%>
-  <%- end -%>
+    <%- if @parent -%>
+      <p><%= t('manifestation.record_not_added') %></p>
+    <%- else -%>
+      <!-- TODO: 検索結果が少ない場合にも表示させる -->
+      <%= render 'manifestations/not_found' -%>
+    <%- end -%>
 
     <div class="autopagerize_insert_before"></div>
-
+  <%- end -%>
   </div>
 </div>
 
@@ -106,6 +124,7 @@
       <%= link_to((image_tag 'icons/feed.png', size: '16x16', class: 'enju_icon', alt: t('page.feed')), url_for(params.permit.merge(format: :rss, page: nil, only_path: true))) -%> <%= link_to t('page.search_result_feed'), url_for(params.permit.merge(format: :rss, page: nil, commit: nil, only_path: true)) -%>
     <%- end -%>
   </div>
+  <%= render 'manifestations/export_list' %>
 </div>
 
 <% if defined?(EnjuBookmark) %>
