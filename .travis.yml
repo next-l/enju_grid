@@ -9,17 +9,12 @@ before_script:
   - bundle exec rake db:migrate
 services:
   - redis-server
-gemfile:
-  - gemfiles/rails_4.2.gemfile
-  - gemfiles/rails_5.0.gemfile
 env:
   - DB=sqlite
   - DB=mysql
   - DB=postgresql
-matrix:
-  allow_failures:
-    - gemfile: gemfiles/rails_5.0.gemfile
 notifications:
   slack:
     secure: WdULbPUWuvIle2lZijTJDJRnGPP9/bLRlZVvKiddC+uDeFf1hOycMzKMgJDd0Y7tIv25pwBBbah808U7aOdcVDjNTL8Lid6ps+gs7DckLRpmGpbx8KkXPAcG2rG5EqMfgQ6gXtTv/uOCvorYYY+pAlraII+2UmqZ3IRuQqZl0gexDXQheB96yGXshlIQj5ZSpTgjTOQkA7IUIDjElv5Fadu4nEXlIgxMNBfwOJbSWBiCeXiaU2ZMaFGWonvjxQfIHu0S+cfIpA3yWK7pjR+5M9aBIup1VoYtmujiF3z83saPCrTjuKh7S+W6zoF4Ylh/zDEJJTH48vQ647UtABT6pOZ4d+whCJtM3HQcRSS1di+Gbsy2IxWWOQ0MlK2vOmsSn6C4cibsuDDNNwNwkd7JcPGW+vPBOweBGLS/8GpvMuGi3Xmkmu7/T5o8/dn7o6QQVDAGOFf8Hoelh7NMVVHcjFge2K8vrI9QM9lWN6OGRf6wvIuI2MkvGqdNewubugGxT0nmLx1KH5n6K50ZkG+ok+i6DNlqXjHMgSg+OxLo966qKs61mRAYwUcfu7ZlIFJlCFkeqQ4S0mdQpKdf63FB9nGHkmxi4K+RfyUO+y2/24/9LupBuUSIg83fsN+XBL9Ps6yrsK4FMaErKT+B6OpAi6dLkuTPcsNy2OcWJrt4YeI=
 sudo: false
+dist: precise
