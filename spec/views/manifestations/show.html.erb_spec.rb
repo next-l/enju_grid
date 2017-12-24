@@ -4,7 +4,7 @@ describe "manifestations/show" do
   fixtures :all
 
   before(:each) do
-    @manifestation = assign(:manifestation, FactoryGirl.create(:manifestation))
+    @manifestation = assign(:manifestation, FactoryBot.create(:manifestation))
     @library_group = LibraryGroup.first
   end
 
