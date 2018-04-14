@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = EnjuGrid::VERSION
   s.authors     = ["Masao Takaku"]
   s.email       = ["tmasao@acm.org"]
-  s.homepage    = "https://github.com/masao/enju_grid"
+  s.homepage    = "https://github.com/next-l/enju_grid"
   s.summary     = "Next-L Enju Grid"
   s.description = "Grid User interface for Next-L Enju"
 
@@ -18,13 +18,13 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_biblio", "~> 0.2.4"
 
-  s.add_development_dependency "enju_leaf", "~> 1.2.1"
+  s.add_development_dependency "enju_leaf", "~> 1.2.2"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.2"
-  s.add_development_dependency "enju_circulation", "~> 0.2.4"
+  s.add_development_dependency "enju_circulation", "~> 0.2.5"
   s.add_development_dependency "enju_subject", "~> 0.2.3"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "mysql2"
-  s.add_development_dependency "pg"
+  s.add_development_dependency "mysql2", "~> 0.4.10"
+  s.add_development_dependency "pg", "~> 0.21"
   s.add_development_dependency "rspec-rails", "~> 3.5"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "factory_bot_rails"
