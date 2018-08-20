@@ -4,6 +4,9 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 require "enju_grid"
+require "enju_circulation"
+require "enju_subject"
+require "enju_manifestation_viewer"
 
 module Dummy
   class Application < Rails::Application
