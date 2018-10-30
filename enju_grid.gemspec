@@ -18,10 +18,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_biblio", "~> 0.3.0"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.0.rc.1"
+  s.add_development_dependency "enju_leaf", "~> 1.3.0"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.3.0"
-  s.add_development_dependency "enju_circulation", "~> 0.3.0.rc.1"
-  s.add_development_dependency "enju_subject", "~> 0.3.0.rc.1"
+  s.add_development_dependency "enju_circulation", "~> 0.3.0"
+  s.add_development_dependency "enju_subject", "~> 0.3.0"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
   s.add_development_dependency "pg"
