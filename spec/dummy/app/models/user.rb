@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
     :lockable, :lock_strategy => :none, :unlock_strategy => :none
 
   include EnjuSeed::EnjuUser
-  include EnjuCirculation::EnjuUser
 end
 
+Manifestation.include(EnjuLoc::EnjuManifestation)
 Manifestation.include(EnjuSubject::EnjuManifestation)
-Item.include(EnjuCirculation::EnjuItem)

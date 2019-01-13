@@ -16,6 +16,7 @@ describe "manifestations/index" do
     @max_number_of_results = 500
     @library_group = LibraryGroup.first
     view.stub(:params).and_return(ActionController::Parameters.new)
+    view.stub(:filtered_params).and_return(ActionController::Parameters.new(per_page: 50).permit(:per_page))
   end
 
   it "renders attributes in <p>" do

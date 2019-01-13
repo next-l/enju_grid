@@ -10,7 +10,6 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'factory_bot'
-require 'sunspot-rails-tester'
 require 'pundit/rspec'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 

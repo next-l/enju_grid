@@ -22,3 +22,4 @@ two:
 #  updated_at                 :datetime         not null
 #  position                   :integer
 #
+
