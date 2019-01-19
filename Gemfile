@@ -23,7 +23,7 @@ gem "codeclimate-test-reporter", group: :test, require: false
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 4.2'
 gem 'mobility'
-gem 'rspec_junit_formatter'
+gem 'rspec_junit_formatter', group: :test
 
 # To use debugger
 # gem 'debugger'

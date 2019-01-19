@@ -8,3 +8,4 @@ end
 
 Manifestation.include(EnjuCirculation::EnjuManifestation)
 Manifestation.include(EnjuSubject::EnjuManifestation)
+Manifestation.include(EnjuManifestationViewer::EnjuManifestation)
