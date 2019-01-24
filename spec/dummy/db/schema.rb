@@ -820,7 +820,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_145847) do
     t.text "attachment_meta"
     t.integer "month_of_publication"
     t.boolean "fulltext_content"
-    t.string "doi"
     t.boolean "serial"
     t.text "statement_of_responsibility"
     t.text "publication_place"
@@ -828,7 +827,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_145847) do
     t.text "dimensions"
     t.index ["access_address"], name: "index_manifestations_on_access_address"
     t.index ["date_of_publication"], name: "index_manifestations_on_date_of_publication"
-    t.index ["doi"], name: "index_manifestations_on_doi"
     t.index ["manifestation_identifier"], name: "index_manifestations_on_manifestation_identifier", unique: true
     t.index ["nii_type_id"], name: "index_manifestations_on_nii_type_id"
     t.index ["updated_at"], name: "index_manifestations_on_updated_at"
