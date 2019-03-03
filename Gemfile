@@ -22,7 +22,8 @@ gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer'
 gem "codeclimate-test-reporter", group: :test, require: false
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 4.2'
-gem 'mobility'
+gem 'json_translate'
+gem 'sassc-rails'
 gem 'rspec_junit_formatter', group: :test
 
 # To use debugger
