@@ -1,5 +1,5 @@
 class CreateUserCheckoutStats < ActiveRecord::Migration[5.2]
-  def self.up
+  def change
     create_table :user_checkout_stats do |t|
       t.datetime :start_date
       t.datetime :end_date
@@ -7,9 +7,5 @@ class CreateUserCheckoutStats < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :user_checkout_stats
   end
 end
