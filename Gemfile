@@ -19,12 +19,14 @@ gem 'enju_message', github: 'next-l/enju_message'
 gem 'enju_circulation', github: 'next-l/enju_circulation'
 gem 'enju_subject', github: 'next-l/enju_subject'
 gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer'
-gem "codeclimate-test-reporter", group: :test, require: false
+gem 'paper_trail'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 4.2'
-gem 'json_translate'
 gem 'sassc-rails'
-gem 'rspec_junit_formatter', group: :test
+gem 'jbuilder'
+group :test do
+  gem 'rspec_junit_formatter'
+end
 
 # To use debugger
 # gem 'debugger'

@@ -1,6 +1,6 @@
       <tr class="line<%= cycle("0", "1") -%>">
         <td style="width:31%">
           <%= render 'manifestations/book_jacket', manifestation: manifestation -%>
-          <span class="original_title"><%= manifestation.original_title %></span>
+          <span class="original_title"><%=h manifestation.original_title %></span>
         </td>
       </tr>

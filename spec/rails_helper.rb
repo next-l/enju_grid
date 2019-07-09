@@ -1,5 +1,7 @@
 require 'simplecov'
-SimpleCov.start
+require 'coveralls'
+SimpleCov.start 'rails'
+Coveralls.wear!
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
@@ -56,19 +58,8 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.extend ControllerMacros, :type => :controller
-
-  config.before do
-    Sunspot.session = Sunspot::Rails::StubSessionProxy.new($original_sunspot_session)
-  end
-
-  config.before :each, :solr => true do
-    Sunspot::Rails::Tester.start_original_sunspot_session
-    Sunspot.session = $original_sunspot_session
-    Sunspot.remove_all!
-  end
+  config.extend ControllerMacros, type: :controller
 end
 
 FactoryBot.definition_file_paths << "#{::Rails.root}/../../spec/factories"
 FactoryBot.find_definitions
-
