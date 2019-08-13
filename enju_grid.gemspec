@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Next-L Enju Grid"
   s.description = "Grid User interface for Next-L Enju"
 
-  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
   s.add_dependency "enju_leaf", "~> 1.3.3"
@@ -29,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "sunspot_solr", "~> 2.5"
   s.add_development_dependency "coveralls"
+  s.add_development_dependency "rails", "~> 5.2"
 end
