@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_leaf", "~> 1.3.3"
 
-  s.add_development_dependency "enju_manifestation_viewer", "~> 0.3.3"
-  s.add_development_dependency "enju_circulation", "~> 0.3.4"
-  s.add_development_dependency "enju_subject", "~> 0.3.1"
+  s.add_development_dependency "enju_manifestation_viewer", "~> 0.3.4"
+  s.add_development_dependency "enju_circulation", "~> 0.3.8"
+  s.add_development_dependency "enju_subject", "~> 0.3.2"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
   s.add_development_dependency "pg"
