@@ -16,12 +16,12 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,solr,tmp}/**/*"]
 
-  s.add_dependency "enju_biblio", "~> 0.4.0.beta.1"
+  s.add_dependency "enju_biblio", "~> 0.5.0.beta.1"
 
-  s.add_development_dependency "enju_leaf", "~> 1.4.0.beta.1"
-  s.add_development_dependency "enju_manifestation_viewer", "~> 0.4.0.beta.1"
-  s.add_development_dependency "enju_circulation", "~> 0.4.0.beta.1"
-  s.add_development_dependency "enju_subject", "~> 0.4.0.beta.1"
+  s.add_development_dependency "enju_leaf", "~> 3.0.0.beta.1"
+  s.add_development_dependency "enju_manifestation_viewer", "~> 0.5.0.beta.1"
+  s.add_development_dependency "enju_circulation", "~> 0.5.0.beta.1"
+  s.add_development_dependency "enju_subject", "~> 0.5.0.beta.1"
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails", "~> 3.8"
   s.add_development_dependency "simplecov"

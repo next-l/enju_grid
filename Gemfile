@@ -10,6 +10,7 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
+gem 'rails', '~> 5.2'
 gem 'enju_seed', github: 'next-l/enju_seed'
 gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
@@ -19,11 +20,10 @@ gem 'enju_message', github: 'next-l/enju_message'
 gem 'enju_circulation', github: 'next-l/enju_circulation'
 gem 'enju_subject', github: 'next-l/enju_subject'
 gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer'
-gem 'paper_trail'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 4.2'
 gem 'sassc-rails'
 gem 'jbuilder'
+gem 'webpacker'
 group :test do
   gem 'rspec_junit_formatter'
 end
