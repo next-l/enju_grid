@@ -18,5 +18,3 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
 end
-
-gem 'enju_seed', github: 'next-l/enju_seed', branch: '1.3'
